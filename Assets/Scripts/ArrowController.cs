@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class ArrowController : MonoBehaviour
 {
@@ -41,5 +42,36 @@ public class ArrowController : MonoBehaviour
             myspriteRenderer.color = Color.green;
         }
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "enemy")
+        {
+            var enemy = collision.gameObject.GetComponent<EnemyController>();
+            DoSpecialEffects(enemy);
+            Destroy(gameObject);
+        }
+    }
+
+    private void DoSpecialEffects(EnemyController enemy )
+    {
+        if (myArrowType == ArrowType.normal)
+        {
+            enemy.TakeDamage(50); 
+        }
+        if (myArrowType == ArrowType.explosive)
+        {
+            var Enemys = FindObjectsOfType<EnemyController>();
+            var EnemysInRange = Enemys.Where(e => Vector3.Distance(e.transform.position, transform.position) < 5);
+            foreach (var Enemy in EnemysInRange) 
+            {
+                Enemy.TakeDamage(50); 
+            } 
+        }
+        if (myArrowType == ArrowType.poison)
+        {
+            enemy.Poison();
+        }
     }
 }

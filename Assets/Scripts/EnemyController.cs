@@ -15,6 +15,19 @@ public class EnemyController : MonoBehaviour
     public float maxHealth;
     public float currentHealth;
 
+    public float PoisonDamage;
+    public float PoisonInterval;
+    public float PoisonTimer;
+    public int TimesPoisoned;
+    public bool IsPoisoned; 
+
+    public void Poison()
+    { 
+        IsPoisoned = true;
+        PoisonTimer = 0;
+        TimesPoisoned = 0;
+    }
+
     void Start()
     {
         currentHealth = maxHealth;    
@@ -30,6 +43,28 @@ public class EnemyController : MonoBehaviour
             transform.position = newPosition;
         }else{
             TryAttack();
+        }
+
+        CheckPoison();
+        
+    }
+
+    private void CheckPoison()
+    {
+        if(!IsPoisoned){
+            return;
+        }
+
+        PoisonTimer += Time.deltaTime;
+        if (PoisonTimer >= PoisonInterval)
+        {
+            TakeDamage(PoisonDamage);
+            PoisonTimer = 0;
+            TimesPoisoned++;
+        }
+
+        if(TimesPoisoned >= 5){
+            IsPoisoned = false;
         }
     }
 
@@ -47,16 +82,11 @@ public class EnemyController : MonoBehaviour
         playerTower.health -= damage;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.tag == "arrow"){
-            currentHealth -= 50;
+    public void TakeDamage(float damage){
+        currentHealth -= damage;
 
-            Destroy(collision.gameObject);
-
-            if(currentHealth <= 0){
-                Destroy(gameObject);
-            }
+        if(currentHealth <= 0){
+            Destroy(gameObject);
         }
     }
 }
