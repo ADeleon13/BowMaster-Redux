@@ -11,6 +11,7 @@ public class ArrowLauncher : MonoBehaviour
     public GameObject dragIndicator;
     public LineRenderer lineRenderer;
     private Camera MainCamera;
+    public ArrowSelector arrowSelector;
 
     void Start()
     {
@@ -61,6 +62,8 @@ public class ArrowLauncher : MonoBehaviour
 
         ArrowController arrowController = arrowInstance.GetComponent<ArrowController>();
         Vector3 offset  = dragIndicator.transform.position - clickStartIndicator.transform.position;
+        arrowController.Setup(arrowSelector.selectedArrowType);
+
         arrowController.Launch(offset);
     }
 }

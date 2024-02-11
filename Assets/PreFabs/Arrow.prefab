@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyRigidbody2D: {fileID: 2076399397348336378}
+  myspriteRenderer: {fileID: 613894212214299985}
   OffsetMultiplier: 3
 --- !u!50 &2076399397348336378
 Rigidbody2D:
