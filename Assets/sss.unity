@@ -565,6 +565,7 @@ MonoBehaviour:
   clickStartIndicator: {fileID: 638236120}
   dragIndicator: {fileID: 2049365420}
   lineRenderer: {fileID: 493442350}
+  arrowSelector: {fileID: 1068852880}
 --- !u!212 &493442347
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -936,6 +937,9 @@ MonoBehaviour:
   ArrowButtonNormal: {fileID: 482618370}
   ArrowButtonExplosive: {fileID: 256047728}
   ArrowButtonPoison: {fileID: 2124177507}
+  ArrowImageNormal: {fileID: 482618371}
+  ArrowImageExplosive: {fileID: 256047729}
+  ArrowImagePoison: {fileID: 2124177508}
 --- !u!114 &1068852881
 MonoBehaviour:
   m_ObjectHideFlags: 0
